@@ -1,4 +1,5 @@
-import { MenuIcon, School } from "lucide-react";
+import { MenuIcon, School2} from "lucide-react";
+
 import React from "react";
 import {
   DropdownMenu,
@@ -32,7 +33,7 @@ const Navbar = () => {
       {/* Desktop */}
       <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full">
         <div className="flex item-center gap-2">
-          <School size={"30"} />
+          <School2  size={"30"} />
           <h1 className="hidden md:block font-extrabold text-2xl">E-Academy</h1>
         </div>
         <div className="flex item-center gap-7">
