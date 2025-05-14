@@ -1,6 +1,6 @@
-import { MenuIcon, School2} from "lucide-react";
+import { MenuIcon, School2 } from "lucide-react";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -25,16 +25,32 @@ import {
 } from "./ui/sheet";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutUserMutation } from "@/features/api/authApi";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const user = true;
+  const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    await logoutUser();
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message || "User logged out");
+      navigate("/login");
+    }
+  }, [isSuccess]);
+
   return (
     <div className="h-16 dark:bg-[#020817] bg-white border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10">
       {/* Desktop */}
       <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full">
         <div className="flex item-center gap-2">
-          <School2  size={"30"} />
+          <School2 size={"30"} />
           <h1 className="hidden md:block font-extrabold text-2xl">E-Academy</h1>
         </div>
         <div className="flex item-center gap-7">
@@ -53,9 +69,15 @@ const Navbar = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
 
                 <DropdownMenuGroup>
-                  <DropdownMenuItem><Link to="my-learning">My Learning</Link></DropdownMenuItem>
-                  <DropdownMenuItem ><Link to="profile">Edit Profile</Link></DropdownMenuItem>
-                  <DropdownMenuItem>Log out</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="my-learning">My Learning</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="profile">Edit Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logoutHandler}>
+                    Logout
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
 
                 <DropdownMenuSeparator />
@@ -97,7 +119,7 @@ const MobileNavbar = () => {
           <MenuIcon />
         </Button>
       </SheetTrigger>
-         <SheetContent className="flex flex-col">
+      <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
           <SheetTitle>E-Academy</SheetTitle>
           <DarkMode />
@@ -111,8 +133,7 @@ const MobileNavbar = () => {
         {role == "instructor" && (
           <SheetFooter>
             <SheetClose asChild>
-              <Button type="submit">Dashboard
-              </Button>
+              <Button type="submit">Dashboard</Button>
             </SheetClose>
           </SheetFooter>
         )}
