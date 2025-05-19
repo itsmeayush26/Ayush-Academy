@@ -42,33 +42,30 @@ const Profile = () => {
     const file = e.target.files?.[0];
     if (file) setProfilePhoto(file);
   };
-  
-  
 
-
-  
   const updateUserHandler = async () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("profilePhoto", profilePhoto);
     await updateUser(formData);
   };
+  useEffect(() => {
+    refetch();
+  }, []);
 
-useEffect(() => {
-  if (isSuccess) {
-    refetch;
-    toast.success(data.message ||"profile updated.");
-  }
-  if (isError) {
-    toast.error(error.message ||"failed to update profile. ");
-  }
-}, [isSuccess, isError, updateUserData, error]); 
+  useEffect(() => {
+    if (isSuccess) {
+      refetch;
+      toast.success(data.message || "profile updated.");
+    }
+    if (isError) {
+      toast.error(error.message || "failed to update profile. ");
+    }
+  }, [isSuccess, isError, updateUserData, error]);
 
-if (isLoading) return <h1>profile Loading...</h1>;
+  if (isLoading) return <h1>profile Loading...</h1>;
   const { user } = data;
 
-
-  
   return (
     <div className="my-24 max-w-4xl mx-auto px-4">
       <h1 className="font-bold text-2xl text-center md:text-left"> Profile</h1>
@@ -144,8 +141,11 @@ if (isLoading) return <h1>profile Loading...</h1>;
                 </div>
               </div>
               <DialogFooter>
-                <Button disabled={updateUserIsLoading} onClick={updateUserHandler}>
-                  {updateUserIsLoading? (
+                <Button
+                  disabled={updateUserIsLoading}
+                  onClick={updateUserHandler}
+                >
+                  {updateUserIsLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 animate-spin" />
                       Please Wait
