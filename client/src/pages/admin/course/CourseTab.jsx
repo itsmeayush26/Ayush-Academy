@@ -18,10 +18,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useEditCourseMutation } from "@/features/api/courseApi";
 import { Loader2 } from "lucide-react";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Form, useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -38,6 +40,11 @@ const CourseTab = () => {
 
   const navigate = useNavigate();
 
+  const params = useParams();
+  const courseId = params.courseId;
+  const [editCourse, { data, isLoading, isSuccess, error }] =
+    useEditCourseMutation();
+
   const changeEventHandler = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -50,25 +57,43 @@ const CourseTab = () => {
     setInput({ ...input, courseLevel: value });
   };
   //get files
- const selectThumbnail = (e) => {
-  const file = e.target.files?.[0];
-  if (file) {
-    setInput({ ...input, courseThumbnail: file });
+  const selectThumbnail = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setInput({ ...input, courseThumbnail: file });
 
-    const fileReader = new FileReader();
-    fileReader.onloadend = () => {
-      setPreviewThumbnail(fileReader.result);
-    };
-    fileReader.readAsDataURL(file);
-  }
+      const fileReader = new FileReader();
+      fileReader.onloadend = () => {
+        setPreviewThumbnail(fileReader.result);
+      };
+      fileReader.readAsDataURL(file);
+    }
+  };
+ const updateCourseHandler = async () => {
+  const formData = new FormData();
+  formData.append("courseTitle", input.courseTitle);
+  formData.append("subTitle", input.subTitle);
+  formData.append("description", input.description);
+  formData.append("category", input.category);
+  formData.append("courseLevel", input.courseLevel);
+  formData.append("coursePrice", input.coursePrice);
+  formData.append("courseThumbnail", input.courseThumbnail); 
+
+  await editCourse({ FormData: formData, courseId });
+
 };
-const updateCourseHandler =()=>{
-  console.log(input);
-}
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message || "Course updated");
+    }
+    if (error) {
+      toast.error(error.data.message || "Failed to update course");
+    }
+  }, [isSuccess, error]);
 
   const isPublished = false;
-  const isLoading = false;
+  // const isLoading = false;
 
   return (
     <Card>
@@ -186,7 +211,7 @@ const updateCourseHandler =()=>{
             <Button onClick={() => navigate("/admin/course")} variant="outline">
               Cancel
             </Button>
-            <Button disabled={isLoading} onClick={updateCourseHandler} >
+            <Button disabled={isLoading} onClick={updateCourseHandler}>
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
