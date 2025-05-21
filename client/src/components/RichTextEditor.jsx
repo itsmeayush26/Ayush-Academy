@@ -1,14 +1,19 @@
-// import { useState } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";  
 
+const RichTextEditor = ({ input, setInput }) => {
+  const handleChange = (content) => {
+    setInput({ ...input, description: content }); // content is HTML
+  };
 
-const RichTextEditor = ({input, setInput}) => {
+  return (
+    <ReactQuill
+      theme="snow"
+      value={input.description || ""} // ensure it's always a string
+      onChange={handleChange}
+    />
+  );
+};
 
-    const handleChange = (content) => {
-        setInput({...input, description:content});
-    }
-   
-  return <ReactQuill theme="snow" value={input.description} onChange={handleChange} />;
-}
 export default RichTextEditor;
