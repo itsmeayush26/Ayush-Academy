@@ -1,34 +1,29 @@
-import React from 'react'
+import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import Course from './Course';
-
+import Course from "./Course";
 
 const MyLearning = () => {
-
-  const isLoading=false;
-  const myLearningCourses=[1,2];
+  const isLoading = false;
+  const myLearningCourses = [];
   return (
-    <div className='max-w-4xl mx-auto my-24 px-4 md:0'>
-    <h1 className='font-bold text-2xl'>My Learning</h1>
-    <div className='my-5'>
-    {
-        isLoading?(
-            <MyLearningSkeleton/>
-        ) :myLearningCourses.length===0? 
-        (<p>you are not enrolled in any course.</p>):
-        <div className='grid grid-cols1 sm:grid-cols-2 md:grid-cols-3 gap-4'>{
-             [1,2].map((course, index) => 
-              <Course key={index} />)
-}
-        </div>
-       
-    }
-
+    <div className="max-w-4xl mx-auto my-24 px-4 md:0">
+      <h1 className="font-bold text-2xl">My Learning</h1>
+      <div className="my-5">
+        {isLoading ? (
+          <MyLearningSkeleton />
+        ) : myLearningCourses.length === 0 ? (
+          <p>you are not enrolled in any course.</p>
+        ) : (
+          <div className="grid grid-cols1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[1, 2].map((course, index) => (
+              <Course key={index} course={course}/>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
-
-    </div>
-  )
-}
+  );
+};
 
 export default MyLearning;
 

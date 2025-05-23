@@ -21,6 +21,7 @@ import {
 import {
   useEditCourseMutation,
   useGetCourseByIdQuery,
+  usePublishCourseMutation,
 } from "@/features/api/courseApi";
 import { Loader2 } from "lucide-react";
 
@@ -51,6 +52,7 @@ const CourseTab = () => {
 
   const [editCourse, { data, isLoading, isSuccess, error }] =
     useEditCourseMutation();
+    const[publishCourse]=usePublishCourseMutation();
 
   //  Load course data once it is fetched
   useEffect(() => {
@@ -69,6 +71,20 @@ const CourseTab = () => {
       setPreviewThumbnail(course.courseThumbnail); // Set preview for existing image
     }
   }, [courseByIdData]);
+
+  const publishStatusHandler = async (action)=>{
+    const response =await publishCourse({courseId, query:action});
+    if(response.data){
+      refetch();
+      toast.success(response.data,message);
+    }
+    try{
+
+    }catch(error){
+      toast.error("Failed to publish or unpublish course")
+
+    }
+  }
 
   //  Toast for mutation result
   useEffect(() => {
@@ -144,8 +160,8 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="space-x-2">
-          <Button variant="outline">
-            {isPublished ? "Unpublished" : "Publish"}
+          <Button  disabled={courseByIdData?.course.lectures.length===0} variant="outline" onClick={()=>publishStatusHandler(courseByIdData?.course.isPublished ? "false":"true")}>
+          {courseByIdData?.course.isPublished ? "unpublished":"publish"}
           </Button>
           <Button>Remove Course</Button>
         </div>

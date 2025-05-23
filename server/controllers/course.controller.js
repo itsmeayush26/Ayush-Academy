@@ -123,7 +123,8 @@ export const getCourseById = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Failed to create course ",
+      message: "Failed to fetch course ",
+      error: error.message, 
     });
   }
 };
@@ -219,7 +220,6 @@ export const editLecture = async (req, res) => {
   }
 };
 
-
 export const removeLecture = async (req, res) => {
   try {
     const { lectureId } = req.params;
@@ -250,9 +250,8 @@ export const removeLecture = async (req, res) => {
   }
 };
 
-
-export const getLectureById = async(req,res)=>{
-  try{
+export const getLectureById = async (req, res) => {
+  try {
     const { lectureId } = req.params;
     const lecture = await Lecture.findById(lectureId);
 
@@ -263,8 +262,7 @@ export const getLectureById = async(req,res)=>{
     }
     return res.status(200).json({
       lecture,
-    })
-
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -272,7 +270,47 @@ export const getLectureById = async(req,res)=>{
     });
   }
 };
+//publish and unpublish course logic
+export const togglePublishCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { publish } = req.query; //true or false value its like action
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({
+        message: "Course not found!",
+      });
+    }
+    //publish status based on the query parameter
+    course.isPublished = publish == "true";
+    await course.save();
+    const statusMessage = course.isPublished ? "Published" : "Unpublished";
+    return res.status(200).json({
+      message: `Course is ${statusMessage}`,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Failed to update status",
+    });
+  }
+};
 
-
-
-
+export const getPublishedCourse = async (_, res) => {
+  try {
+    const courses = await Course.find({ isPublished: true }).populate({path:"creator",select:"name photoUrl"});
+    if (!courses) {
+      return res.status(404).json({
+        message: "Course not found!",
+      });
+    }
+    return res.status(200).json({
+      courses,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Failed to get published courses",
+    });
+  }
+};
