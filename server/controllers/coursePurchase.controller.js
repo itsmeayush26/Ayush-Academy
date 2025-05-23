@@ -1,29 +1,28 @@
 import Stripe from "stripe";
-import { Course } from "../models/course.models.js";
-import { coursePurchase } from "../models/coursePurchase.model.js";
+import { Course } from "../models/course.model.js";
+import { CoursePurchase } from "../models/coursePurchase.model.js";
+import { Lecture } from "../models/lecture.model.js";
+import { User } from "../models/user.model.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const createCheckoutSession = async (req, res) => {
   try {
-    const userId = req.Id;
+    const userId = req.id;
     const { courseId } = req.body;
 
     const course = await Course.findById(courseId);
-    if (!course)
-      return res.status(404).json({
-        message: "Course not found!",
-      });
-    //create a new course purchased record
+    if (!course) return res.status(404).json({ message: "Course not found!" });
 
-    const newPurchase = new coursePurchase({
+    // Create a new course purchase record
+    const newPurchase = new CoursePurchase({
       courseId,
       userId,
       amount: course.coursePrice,
       status: "pending",
     });
 
-    //create a stripe checkout session
+    // Create a Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
@@ -66,12 +65,9 @@ export const createCheckoutSession = async (req, res) => {
       url: session.url, // Return the Stripe checkout URL
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
-
-//webhook batata h basically payment complete hua h  ki ni , wo usi ko track karta h ,
-//  agr use ni karoge toh payment hue bina save ho jaega data leading to inconsistency
 
 export const stripeWebhook = async (req, res) => {
   let event;
@@ -111,7 +107,7 @@ export const stripeWebhook = async (req, res) => {
       }
       purchase.status = "completed";
 
-      // Make all lectures visible (the free one ) by setting `isPreviewFree` to true
+      // Make all lectures visible by setting `isPreviewFree` to true
       if (purchase.courseId && purchase.courseId.lectures.length > 0) {
         await Lecture.updateMany(
           { _id: { $in: purchase.courseId.lectures } },

@@ -1,5 +1,5 @@
-import { Course } from "../models/course.models.js";
-import { Lecture } from "../models/lecture.models.js";
+import { Course } from "../models/course.model.js";
+import { Lecture } from "../models/lecture.model.js";
 import {
   deleteMediaFromCloudinary,
   deleteVideoFromCloudinary,
