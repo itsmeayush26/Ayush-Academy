@@ -1,14 +1,25 @@
-import express  from "express";
+import express from "express";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
-import { createCourse, createLecture, editCourse, editLecture, getCourseById, getCourseLecture, getCreatorCourse, getLectureById, getPublishedCourse, removeLecture, togglePublishCourse } from "../controllers/course.controller.js";
+import {
+  createCourse,
+  createLecture,
+  editCourse,
+  editLecture,
+  getCourseById,
+  getCourseLecture,
+  getCreatorCourse,
+  getLectureById,
+  getPublishedCourse,
+  removeLecture,
+  togglePublishCourse,
+  
+} from "../controllers/course.controller.js";
 import upload from "../utils/multer.js";
 
-
-const router =express.Router();
+const router = express.Router();
 
 router.route("/").post(isAuthenticated, createCourse);
-router.route("/published-courses").get(isAuthenticated, getPublishedCourse );
-
+router.route("/published-courses").get(isAuthenticated, getPublishedCourse);
 
 router.route("/").get(isAuthenticated, getCreatorCourse);
 router.route("/:courseId").put(isAuthenticated, upload.single("courseThumbnail"), editCourse);
@@ -18,12 +29,6 @@ router.route("/:courseId/lecture").get(isAuthenticated, getCourseLecture);
 router.route("/:courseId/lecture/:lectureId").post(isAuthenticated, editLecture);
 router.route("/lecture/:lectureId").delete(isAuthenticated, removeLecture);
 router.route("/lecture/:lectureId").get(isAuthenticated, getLectureById);
-router.route("/:courseId").patch(isAuthenticated, togglePublishCourse);//patch is used when we need a minor change 
-
-
+router.route("/:courseId").patch(isAuthenticated, togglePublishCourse); //patch is used when we need a minor change
 
 export default router;
-
-
-
-

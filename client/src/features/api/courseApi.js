@@ -22,7 +22,7 @@ export const courseApi = createApi({
       query: () => ({
         url: "/published-courses",
         method: "GET",
-      })
+      }),
     }),
     getCreatorCourse: builder.query({
       query: () => ({
@@ -71,6 +71,7 @@ export const courseApi = createApi({
         method: "POST",
         body: { lectureTitle, videoInfo, isPreviewFree },
       }),
+      invalidatesTags: ["Refetch_Lecture"], 
     }),
     removeLecture: builder.mutation({
       query: (lectureId) => ({
@@ -86,11 +87,10 @@ export const courseApi = createApi({
     }),
     publishCourse: builder.mutation({
       query: ({ courseId, query }) => ({
-        url: `/${courseId}?publish=${query}`, ///whenever query in one of object ?is used in place of / 
+        url: `/${courseId}?publish=${query}`, ///whenever query in one of object ?is used in place of /
         method: "PATCH",
       }),
       invalidatesTags: ["Refetch_Lecture"],
-
     }),
   }),
 });
