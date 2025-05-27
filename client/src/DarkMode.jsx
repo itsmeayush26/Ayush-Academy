@@ -1,10 +1,16 @@
-
-import React from 'react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './components/ui/dropdown-menu'
-import { Button } from './components/ui/button'
-import { Moon, Sun } from 'lucide-react'
+import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./components/ui/dropdown-menu";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "./components/ThemeProvider";
+import { Button } from "./components/ui/button";
 
 const DarkMode = () => {
+  const { setTheme } = useTheme();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -14,7 +20,10 @@ const DarkMode = () => {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent
+        align="end"
+        className="w-40 bg-popover text-popover-foreground rounded-md p-2 shadow-md"
+      >
         <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>
@@ -26,7 +35,7 @@ const DarkMode = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default DarkMode
+export default DarkMode;

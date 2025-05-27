@@ -41,7 +41,7 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          <Button className="bg-white dark:bg-gray-800 text-teal-600 rounded-full hover:bg-gray-200 px-6 py-3 shadow">
+          <Button onClick={()=>navigate(`/course/search?query`)} className="bg-white dark:bg-gray-800 text-teal-600 rounded-full hover:bg-gray-200 px-6 py-3 shadow">
             Explore Courses
           </Button>
         </form>

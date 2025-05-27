@@ -64,16 +64,18 @@ const Profile = () => {
   }, [isSuccess, isError, updateUserData, error]);
 
   if (isLoading) return <h1>profile Loading...</h1>;
-  const { user } = data;
+  const user = data && data.user;
+
+  console.log(user);
 
   return (
-    <div className="my-24 max-w-4xl mx-auto px-4">
+    <div className="my-20 max-w-4xl mx-auto px-4">
       <h1 className="font-bold text-2xl text-center md:text-left"> Profile</h1>
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 my-8">
         <div className="flex flex-col items-center">
           <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4">
             <AvatarImage
-              src={user.photoUrl || "https://github.com/shadcn.png"}
+              src={user?.photoUrl || "https://github.com/shadcn.png"}
               alt="@shadcn"
             />
             <AvatarFallback>CN</AvatarFallback>
