@@ -144,7 +144,7 @@ const LectureTab = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div>
+        <div className="space-y-2 ">
           <Label>Title</Label>
           <Input
             value={lectureTitle}
@@ -153,7 +153,7 @@ const LectureTab = () => {
             placeholder="Ex. Introduction to Javascript"
           />
         </div>
-        <div className="my-5">
+        <div className="space-y-2  my-5">
           <Label>
             Video <span className="text-red-500">*</span>
           </Label>

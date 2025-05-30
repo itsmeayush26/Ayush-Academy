@@ -46,13 +46,15 @@ const CourseTab = () => {
   const courseId = params.courseId;
 
   //  Pass courseId to the query
-  const { data: courseByIdData, isLoading: courseByIdLoading , refetch } =
-  useGetCourseByIdQuery(courseId, {
-  });
+  const {
+    data: courseByIdData,
+    isLoading: courseByIdLoading,
+    refetch,
+  } = useGetCourseByIdQuery(courseId, {});
 
   const [editCourse, { data, isLoading, isSuccess, error }] =
     useEditCourseMutation();
-    const[publishCourse]=usePublishCourseMutation();
+  const [publishCourse] = usePublishCourseMutation();
 
   //  Load course data once it is fetched
   useEffect(() => {
@@ -72,19 +74,17 @@ const CourseTab = () => {
     }
   }, [courseByIdData]);
 
-  const publishStatusHandler = async (action)=>{
-    const response =await publishCourse({courseId, query:action});
-    if(response.data){
+  const publishStatusHandler = async (action) => {
+    const response = await publishCourse({ courseId, query: action });
+    if (response.data) {
       refetch();
-      toast.success(response.data,message);
+      toast.success(response.data, message);
     }
-    try{
-
-    }catch(error){
-      toast.error("Failed to publish or unpublish course")
-
+    try {
+    } catch (error) {
+      toast.error("Failed to publish or unpublish course");
     }
-  }
+  };
 
   //  Toast for mutation result
   useEffect(() => {
@@ -153,15 +153,23 @@ const CourseTab = () => {
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between">
-        <div>
+        <div className="space-y-3">
           <CardTitle>Basic Course Information</CardTitle>
           <CardDescription>
             Make changes to your courses here. Click save when you're done.
           </CardDescription>
         </div>
-        <div className="space-x-2">
-          <Button  disabled={courseByIdData?.course.lectures.length===0} variant="outline" onClick={()=>publishStatusHandler(courseByIdData?.course.isPublished ? "false":"true")}>
-          {courseByIdData?.course.isPublished ? "unpublished":"publish"}
+        <div className="space-x-2  space-y-3 sm:space-y-3 md:space-y-3">
+          <Button
+            disabled={courseByIdData?.course.lectures.length === 0}
+            variant="outline"
+            onClick={() =>
+              publishStatusHandler(
+                courseByIdData?.course.isPublished ? "false" : "true"
+              )
+            }
+          >
+            {courseByIdData?.course.isPublished ? "unpublished" : "publish"}
           </Button>
           <Button>Remove Course</Button>
         </div>
@@ -169,7 +177,7 @@ const CourseTab = () => {
 
       <CardContent>
         <div className="space-y-4 mt-5">
-          <div>
+          <div className="space-y-3">
             <Label>Title</Label>
             <Input
               type="text"
@@ -179,7 +187,7 @@ const CourseTab = () => {
               placeholder="Ex. Fullstack developer"
             />
           </div>
-          <div>
+          <div className="space-y-3">
             <Label>Subtitle</Label>
             <Input
               type="text"
@@ -189,13 +197,13 @@ const CourseTab = () => {
               placeholder="Ex. Become a Fullstack developer in 2 months"
             />
           </div>
-          <div>
+          <div className="space-y-3">
             <Label>Description</Label>
             <RichTextEditor input={input} setInput={setInput} />
           </div>
 
           <div className="flex items-center gap-5">
-            <div>
+            <div className="space-y-3">
               <Label>Category</Label>
               <Select value={input.category} onValueChange={selectCategory}>
                 <SelectTrigger className="w-[180px]">
@@ -223,7 +231,7 @@ const CourseTab = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div>
+            <div className="space-y-3">
               <Label>Course Level</Label>
               <Select
                 value={input.courseLevel}
@@ -244,7 +252,7 @@ const CourseTab = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div>
+            <div className="space-y-3">
               <Label>Price in (INR)</Label>
               <Input
                 type="number"
@@ -257,7 +265,7 @@ const CourseTab = () => {
             </div>
           </div>
 
-          <div>
+          <div className="space-y-3">
             <Label>Course Thumbnail</Label>
             <Input
               type="file"

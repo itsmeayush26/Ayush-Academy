@@ -42,15 +42,15 @@ const AddCourse = () => {
   },[isSuccess, error])
 
   return (
-    <div className="flex-1 mx-10">
-      <div className="mb-4">
+    <div className="flex-1 mx-10 mt-20 sm:mt-20 md:mt-0 ">
+      <div className="mb-4 space-y-4">
         <h1 className="font-bold text-xl">
           Lets's add course ,add some basic details for your new course
         </h1>
-        <p className="text-sm">"Lorem ipsum dolor sit amet consectetur."</p>
+        <p className="text-sm ">"Please enter your course details."</p>
       </div>
-      <div className="space-y-4">
-        <div>
+      <div className="space-y-5">
+        <div className='space-y-2'>
           <Label>Title</Label>
           <Input
             type="text"
@@ -60,7 +60,7 @@ const AddCourse = () => {
             placeholder="your course name"
           />
         </div>
-        <div>
+        <div className='space-y-2'>
           <Label>Category</Label>
 
           <Select onValueChange={getSelectedCategory}>

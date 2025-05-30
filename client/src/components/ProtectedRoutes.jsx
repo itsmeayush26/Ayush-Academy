@@ -4,6 +4,7 @@
 // student login
 
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {
   const { user, isAuthenticated } = useSelector((store) => store.auth);
@@ -24,7 +25,7 @@ export const AdminRoute = ({ children }) => {
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
-  if (user.role !== "instructor") {
+  if (user?.role !== "instructor") {
     return <Navigate to="/" />;
   }
   return children;

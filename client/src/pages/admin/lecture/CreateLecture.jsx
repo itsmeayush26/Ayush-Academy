@@ -45,15 +45,15 @@ const CreateLecture = () => {
   console.log(lectureData);
 
   return (
-    <div className="flex-1 mx-10">
-      <div className="mb-4">
-        <h1 className="font-bold text-xl">
+    <div className="flex-1 mx-10 mt-20 sm:mt-20 md:mt-0">
+      <div className="mb-4 space-y-3 ">
+        <h1 className="font-bold text-xl ">
           Lets's add lecture ,add some basic details for your new lecture
         </h1>
-        <p className="text-sm">"Lorem ipsum dolor sit amet consectetur."</p>
+        <p className="text-sm">"Add the lecture which you want ."</p>
       </div>
       <div className="space-y-4">
-        <div>
+        <div className="space-y-3 ">
           <Label>Title</Label>
           <Input
             type="text"

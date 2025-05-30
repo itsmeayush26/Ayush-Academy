@@ -69,7 +69,7 @@ const CourseTable = () => {
   console.log("data ->", data);
 
   return (
-    <div>
+    <div className="mt-20 sm:mt-20 md:mt-0 lg:mt-0">
       <Button onClick={() => navigate(`create`)}>Create a new course </Button>
       <Table>
         <TableCaption>A list of your recent courses.</TableCaption>

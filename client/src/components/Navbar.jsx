@@ -68,7 +68,9 @@ const Navbar = () => {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  <Link to="/">My Account</Link>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
@@ -85,7 +87,9 @@ const Navbar = () => {
                 {user?.role === "instructor" && (
                   <>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem><Link to="/admin/dashboard">Dashboard</Link></DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="/admin/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
                   </>
                 )}
               </DropdownMenuContent>
@@ -98,13 +102,13 @@ const Navbar = () => {
               <Button onClick={() => navigate("/login")}>Signup</Button>
             </div>
           )}
-          <DarkMode/>
+          <DarkMode />
         </div>
       </div>
       {/* Mobile device  */}
       <div className="flex md:hidden items-center justify-between px-4 h-full">
         <h1 className="font-extrabold text-2xl">Ayush-Academy</h1>
-        <MobileNavbar user={user}/>
+        <MobileNavbar user={user} />
       </div>
     </div>
   );
@@ -112,9 +116,9 @@ const Navbar = () => {
 
 export default Navbar;
 
-const MobileNavbar = ({user}) => {
+const MobileNavbar = ({ user }) => {
   const navigate = useNavigate();
-  
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -128,8 +132,11 @@ const MobileNavbar = ({user}) => {
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
-          <SheetTitle> <Link to="/">Ayush-Academy</Link></SheetTitle>
-          <DarkMode/>
+          <SheetTitle>
+            {" "}
+            <Link to="/">Ayush-Academy</Link>
+          </SheetTitle>
+          <DarkMode />
         </SheetHeader>
         <Separator className="mr-2" />
         <nav className="flex flex-col space-y-4">
@@ -140,7 +147,12 @@ const MobileNavbar = ({user}) => {
         {user?.role === "instructor" && (
           <SheetFooter>
             <SheetClose asChild>
-              <Button type="submit" onClick={()=> navigate("/admin/dashboard")}>Dashboard</Button>
+              <Button
+                type="submit"
+                onClick={() => navigate("/admin/dashboard")}
+              >
+                Dashboard
+              </Button>
             </SheetClose>
           </SheetFooter>
         )}

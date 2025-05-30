@@ -5,7 +5,7 @@ import CourseTab from "./CourseTab";
 
 const EditCourse = () => {
   return (
-    <div className="flex-1">
+    <div className="flex-1 mt-20 sm:mt-20 md:mt-0 ">
       <div className="flex items-center justify-between mb-5">
         <h1 className="font-bold text-xl">
           Add details information regarding course
