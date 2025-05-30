@@ -117,8 +117,12 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNavbar = ({ user }) => {
+  const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
   const navigate = useNavigate();
-
+  const logoutHandler = async () => {
+    await logoutUser();
+       navigate("/login");
+  };
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -130,27 +134,43 @@ const MobileNavbar = ({ user }) => {
           <Menu />
         </Button>
       </SheetTrigger>
+
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
-          <SheetTitle>
-            {" "}
-            <Link to="/">Ayush-Academy</Link>
-          </SheetTitle>
-          <DarkMode />
-        </SheetHeader>
-        <Separator className="mr-2" />
-        <nav className="flex flex-col space-y-4">
-          <Link to="/my-learning">My Learning</Link>
-          <Link to="/profile">Edit Profile</Link>
-          <p>Log out</p>
+  <SheetTitle>
+    <SheetClose asChild>
+      <Link to="/">Ayush-Academy</Link>
+    </SheetClose>
+  </SheetTitle>
+  <DarkMode />
+</SheetHeader>
+
+
+        <Separator className="mr-2 my-2" />
+
+        <nav className="flex flex-col space-y-4 mx-4">
+          <SheetClose asChild>
+            <Link to="/my-learning">My Learning</Link>
+          </SheetClose>
+
+          <SheetClose asChild>
+            <Link to="/profile">Edit Profile</Link>
+          </SheetClose>
+
+          <SheetClose asChild>
+            <button
+              onClick={logoutHandler}
+              className="text-left hover:underline focus:outline-none"
+            >
+              Log out
+            </button>
+          </SheetClose>
         </nav>
+
         {user?.role === "instructor" && (
           <SheetFooter>
             <SheetClose asChild>
-              <Button
-                type="submit"
-                onClick={() => navigate("/admin/dashboard")}
-              >
+              <Button onClick={() => navigate("/admin/dashboard")}>
                 Dashboard
               </Button>
             </SheetClose>

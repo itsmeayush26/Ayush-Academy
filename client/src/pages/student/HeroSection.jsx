@@ -21,7 +21,7 @@ const HeroSection = () => {
     <div className="relative bg-gradient-to-r from-teal-400 to bg-cyan-700 dark:from-gray-800 to dark:to-gray-900 py-24 px-4 text-center">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-white text-4xl font-bold mb-4">
-          Find the best courses for you{" "}
+          Your Path, Your Courses, Your Way.{" "}
         </h1>
         <p className="text-gray-200 dark:text-gray-400 mb-8">
           Discover,Learn and Upskill with our wide range of courses.

@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   //destructructure purchased course
 
-  const {purchasedCourse}=data ||[];
+  const purchasedCourse=data?.purchasedCourse ||[];
   const courseData=purchasedCourse.map((course)=>({
     name:course.courseId.courseTitle,
     price:course.courseId.coursePrice,
