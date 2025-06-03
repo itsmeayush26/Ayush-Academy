@@ -99,8 +99,8 @@ Clone the repo
 bash
 Copy
 Edit
-git clone https://github.com/yourusername/ayush-academy.git
-cd ayush-academy
+git clone https://github.com/yourusername/Learn-academy.git
+cd Learn-academy
 Install dependencies
 
 bash
