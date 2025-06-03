@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import { userLoggedIn, userLoggedOut } from "./authSlice";
+import { userLoggedIn, userLoggedOut } from "../authSlice";
 
 const USER_API = "https://ayush-academy-server.onrender.com/api/v1/user/"
 
