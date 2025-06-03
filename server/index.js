@@ -26,7 +26,7 @@ const PORT =process.env.PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"https://ayush-academy-frontend.onrender.com",
+    origin:"https://learn-academy-frontend.onrender.com",
     credentials:true
 
 }))
