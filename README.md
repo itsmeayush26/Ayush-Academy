@@ -1,137 +1,99 @@
-📚 Ayush Academy – LMS Platform
-A full-featured Learning Management System (LMS) built with the MERN Stack, offering powerful course management, user enrollment, rich content editing, and real-time interactivity.
+📚 Learn Academy – Advanced Learning Management System 🚀
 
 
-🚀 Live Demo
+🔗 Live Demo
+https://learn-academy-frontend.onrender.com
 
 
-🛠️ Tech Stack
-⚙️ Frontend
-React.js
+🚀 Tech Stack
+MongoDB + Mongoose
 
-Redux Toolkit + RTK Query – for state management and data fetching
+NoSQL database optimized for flexibility & scalability
 
-React Router DOM – routing
+Mongoose ORM helps with schema definition & validation
 
-Tailwind CSS – utility-first styling
+Express.js + Node.js
 
-shadcn/ui – beautifully styled UI components
+Lightweight, fast backend for handling API requests
 
-Slate.js – Rich Text Editor for course content
+Implements middleware for authentication & error handling
 
-React Hook Form + Zod – form handling and validation
+React.js + Redux Toolkit + RTK Query
 
-Heroicons / Lucide-react – icons
+Component-driven UI for seamless user experience
 
-Axios – API requests (if not using RTK Query for everything)
+Centralized state management with efficient API caching
 
-🔧 Backend
-Node.js + Express.js
+Stripe API
 
-MongoDB + Mongoose – database
+Secure online payment system with real-time transaction monitoring
 
-JWT Auth – authentication
+Supports one-time purchases & subscription models
 
-Bcrypt – password hashing
+Tailwind CSS + shadcn/ui
 
-Multer – file upload (for course thumbnails or videos)
+Utility-first CSS framework for rapid styling
+
+Pre-built UI components for accessibility & consistency
+
+Multer
+
+Middleware for handling image & video uploads efficiently
+
+Supports cloud storage integration for scalability
+
+react-quill
+
+Powerful rich-text editor designed for interactive lessons
+
+Custom formatting with drag-and-drop capabilities
+
 
 ✨ Features
-🔐 Authentication
+🔑 Authentication & User Management
+JWT-based authentication → Ensures secure login & session management
 
-JWT-based signup/login
-
-Role-based access (admin, instructor, student)
+Role-based access → Different dashboards for Admin, Instructor & Student
 
 🎓 Course Management
+Course creation & editing → Instructors can add, update, and delete courses
 
-Add/update/delete courses
+Categorization & pricing → Assign visibility settings & set course fees
 
-Categories, pricing, and visibility settings
+🏆 Progress Tracking
+Personalized dashboards → Students track progress through enrolled courses
 
-🧠 Rich Content Editor
+Completion tracking → Generate certificates upon course completion
 
-Create lessons using a modern Slate.js editor
+💬 Engagement Tools
+Announcements & discussions → Instructors post updates & students interact
 
-👤 User Dashboard
-
-Personalized dashboard for instructors & students
-
-📦 Redux Toolkit Query Integration
-
-Efficient, cache-aware data fetching for backend APIs
-
-🎨 UI/UX
-
-Fully responsive with Tailwind CSS
-
-Accessible, styled components from shadcn/ui
-
-📈 Progress Tracking
-
-Students can track progress in each course (optional/extendable)
-
-💬 Announcements/Comments (optional/extendable)
-
-Interaction inside course modules
-
-🧩 Folder Structure
-pgsql
-Copy
-Edit
-client/
-  ├── components/
-  ├── features/  ← RTK Query APIs and slices
-  ├── pages/
-  ├── routes/
-  ├── utils/
-  └── App.jsx
-
-server/
-  ├── controllers/
-  ├── models/
-  ├── routes/
-  ├── middleware/
-  └── server.js
-🧪 Installation
-Clone the repo
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/Learn-academy.git
-cd Learn-academy
-Install dependencies
-
-bash
-Copy
-Edit
-cd client
-npm install
-cd ../server
-npm install
-Configure .env
-Create .env files in both client/ and server/ folders.
-
-Run the app
-
-bash
-Copy
-Edit
-# In /server
-npm run dev
-
-# In /client
-npm run dev
-✅ Upcoming Features (Roadmap)
-✅ Student progress tracking
-
-✅ Video upload & streaming
-
-⏳ Payment integration (Stripe)
+Instructor Q&A sessions → Real-time messaging system for queries
 
 
-⏳ Instructor analytics dashboard
+💰 Payment Integration
+Stripe API integration → Secure payments with multiple gateway options
 
-🤝 Contributing
-Contributions are welcome! Please open an issue first to discuss what you’d like to change.
+Admin transaction tracking → Dashboard for monitoring sales & refunds
+
+
+📂 Folder Structure
+Client (Frontend) → UI components, pages, Redux slices, RTK Query APIs
+
+Server (Backend) → Controllers, models, routes, authentication middleware
+
+📂 Folder Structure
+Learn-Academy/
+│── client/ (React App)
+│   ├── components/ (Reusables)
+│   ├── features/ (Redux slices & RTK Query APIs)
+│   ├── pages/ (Main views)
+│   ├── routes/ (Navigation setup)
+│   ├── utils/ (Helpers & constants)
+│   └── App.jsx
+│── server/ (Backend API)
+│   ├── controllers/ (Logic for requests)
+│   ├── models/ (MongoDB schemas)
+│   ├── routes/ (API endpoints)
+│   ├── middleware/ (Auth, logging, error handling)
+│   └── server.js
